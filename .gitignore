@@ -53,3 +53,6 @@ debug_*.json
 *.srt
 *.vtt
 .pypirc
+
+# social
+social/
