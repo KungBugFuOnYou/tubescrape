@@ -21,11 +21,17 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import re
 import tempfile
 from pathlib import Path
 
 import pytest
+
+pytestmark = pytest.mark.skipif(
+    os.environ.get('CI') == 'true',
+    reason='Live tests skipped in CI (requires real YouTube API access)',
+)
 
 from tubescrape import (
     YouTube,
