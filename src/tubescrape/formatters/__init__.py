@@ -32,7 +32,7 @@ def get_formatter(name: str) -> Formatter:
     if formatter_cls is None:
         available = ', '.join(sorted(FORMATTERS.keys()))
         raise ValueError(
-            'Unknown formatter: %r. Available: %s' % (name, available)
+            f'Unknown formatter: {name!r}. Available: {available}'
         )
     return formatter_cls()
 

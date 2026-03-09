@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from tubescrape import __version__
-from tubescrape.api.deps import close_youtube, get_youtube, set_youtube
+from tubescrape.api.deps import close_youtube, set_youtube
 from tubescrape.api.routes import channel, playlist, search, transcript
 from tubescrape.api.schemas import ErrorResponse, HealthResponse
 from tubescrape.client import YouTube

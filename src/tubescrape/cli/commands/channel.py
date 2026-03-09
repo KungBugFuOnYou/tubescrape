@@ -12,7 +12,7 @@ from tubescrape.cli.output import (
 
 @click.group(invoke_without_command=True)
 @click.argument('channel')
-@click.option('--max-results', '-n', default=30, type=int, help='Maximum videos to return. Use 0 for all.')
+@click.option('--max-results', '-n', default=30, type=int, help='Max videos (0=all).')
 @click.option('--json', 'output_json', is_flag=True, help='Output as JSON.')
 @click.pass_context
 def channel(ctx: click.Context, channel: str, max_results: int, output_json: bool) -> None:
@@ -85,7 +85,7 @@ def playlists_cmd(ctx: click.Context) -> None:
 
 @channel.command('search')
 @click.argument('query')
-@click.option('--max-results', '-n', default=0, type=int, help='Maximum results to return. Use 0 for all (default).')
+@click.option('--max-results', '-n', default=0, type=int, help='Max results (0=all).')
 @click.pass_context
 def search_cmd(ctx: click.Context, query: str, max_results: int) -> None:
     """Search within a channel's videos.

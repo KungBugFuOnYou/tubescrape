@@ -26,7 +26,7 @@ class WebVTTFormatter(Formatter):
         for segment in transcript.segments:
             start = self._format_timestamp(segment.start)
             end = self._format_timestamp(segment.start + segment.duration)
-            lines.append('%s --> %s' % (start, end))
+            lines.append(f'{start} --> {end}')
             lines.append(segment.text)
             lines.append('')
 

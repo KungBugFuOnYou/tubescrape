@@ -190,9 +190,9 @@ class Transcript:
                 format = ext
             else:
                 raise ValueError(
-                    'Cannot determine format from filename %r. '
+                    f'Cannot determine format from filename {filename!r}. '
                     'Either use a recognized extension (.srt, .vtt, .json, .txt) '
-                    'or pass format= explicitly.' % filename
+                    'or pass format= explicitly.'
                 )
         else:
             format = format.lower()
@@ -273,7 +273,7 @@ class ShortResult:
 
     @property
     def url(self) -> str:
-        return 'https://www.youtube.com/shorts/%s' % self.video_id
+        return f'https://www.youtube.com/shorts/{self.video_id}'
 
     def to_dict(self) -> dict:
         result: dict = {
@@ -313,7 +313,7 @@ class ChannelPlaylistEntry:
 
     @property
     def url(self) -> str:
-        return 'https://www.youtube.com/playlist?list=%s' % self.playlist_id
+        return f'https://www.youtube.com/playlist?list={self.playlist_id}'
 
     def to_dict(self) -> dict:
         result: dict = {
@@ -388,7 +388,7 @@ class PlaylistResult:
 
     @property
     def url(self) -> str:
-        return 'https://www.youtube.com/playlist?list=%s' % self.playlist_id
+        return f'https://www.youtube.com/playlist?list={self.playlist_id}'
 
     def to_dict(self) -> dict:
         return {

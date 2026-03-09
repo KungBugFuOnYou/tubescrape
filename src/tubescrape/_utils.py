@@ -58,8 +58,8 @@ class URLParser:
 
         try:
             parsed = urlparse(url_or_id)
-        except Exception:
-            raise ValueError('Invalid video URL or ID: %s' % url_or_id)
+        except Exception as exc:
+            raise ValueError(f'Invalid video URL or ID: {url_or_id}') from exc
 
         host = (parsed.hostname or '').lower().replace('www.', '')
 
@@ -84,7 +84,7 @@ class URLParser:
                 if match:
                     return match.group(1)
 
-        raise ValueError('Could not extract video ID from: %s' % url_or_id)
+        raise ValueError(f'Could not extract video ID from: {url_or_id}')
 
     @staticmethod
     def extract_channel_id(url_or_id: str) -> str | None:
@@ -116,13 +116,13 @@ class URLParser:
 
         try:
             parsed = urlparse(url_or_id)
-        except Exception:
-            raise ValueError('Invalid channel URL or ID: %s' % url_or_id)
+        except Exception as exc:
+            raise ValueError(f'Invalid channel URL or ID: {url_or_id}') from exc
 
         host = (parsed.hostname or '').lower().replace('www.', '')
 
         if host not in ('youtube.com', 'm.youtube.com', ''):
-            raise ValueError('Not a YouTube URL: %s' % url_or_id)
+            raise ValueError(f'Not a YouTube URL: {url_or_id}')
 
         path = parsed.path.rstrip('/')
 
@@ -139,14 +139,14 @@ class URLParser:
         # /c/ChannelName
         match = re.match(r'^/c/([^/]+)', path)
         if match:
-            return '/c/%s' % match.group(1)
+            return f'/c/{match.group(1)}'
 
         # /user/Username
         match = re.match(r'^/user/([^/]+)', path)
         if match:
-            return '/user/%s' % match.group(1)
+            return f'/user/{match.group(1)}'
 
-        raise ValueError('Could not extract channel ID from: %s' % url_or_id)
+        raise ValueError(f'Could not extract channel ID from: {url_or_id}')
 
     @staticmethod
     def extract_playlist_id(url_or_id: str) -> str:
@@ -169,8 +169,8 @@ class URLParser:
 
         try:
             parsed = urlparse(url_or_id)
-        except Exception:
-            raise ValueError('Invalid playlist URL or ID: %s' % url_or_id)
+        except Exception as exc:
+            raise ValueError(f'Invalid playlist URL or ID: {url_or_id}') from exc
 
         host = (parsed.hostname or '').lower().replace('www.', '')
         if host in ('youtube.com', 'm.youtube.com', 'music.youtube.com'):
@@ -179,7 +179,7 @@ class URLParser:
             if playlist_id:
                 return playlist_id
 
-        raise ValueError('Could not extract playlist ID from: %s' % url_or_id)
+        raise ValueError(f'Could not extract playlist ID from: {url_or_id}')
 
     @staticmethod
     def is_url(value: str) -> bool:
@@ -187,6 +187,4 @@ class URLParser:
         value = value.strip()
         if value.startswith(('http://', 'https://', 'youtu.be/')):
             return True
-        if 'youtube.com' in value:
-            return True
-        return False
+        return 'youtube.com' in value

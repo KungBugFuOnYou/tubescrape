@@ -4,7 +4,6 @@ from html import unescape
 from xml.etree import ElementTree
 
 from tubescrape.models import (
-    BrowseResult,
     ChannelPlaylistEntry,
     ChannelPlaylistsResult,
     PlaylistEntry,
@@ -74,15 +73,15 @@ class ResponseParser:
         """
         if not duration_text:
             return 0
-        parts = duration_text.strip().split(':')
+        str_parts = duration_text.strip().split(':')
         try:
-            parts = [int(p) for p in parts]
+            int_parts = [int(p) for p in str_parts]
         except ValueError:
             return 0
-        if len(parts) == 3:
-            return parts[0] * 3600 + parts[1] * 60 + parts[2]
-        if len(parts) == 2:
-            return parts[0] * 60 + parts[1]
+        if len(int_parts) == 3:
+            return int_parts[0] * 3600 + int_parts[1] * 60 + int_parts[2]
+        if len(int_parts) == 2:
+            return int_parts[0] * 60 + int_parts[1]
         return 0
 
     @staticmethod
@@ -202,7 +201,7 @@ class ResponseParser:
             duration=duration_text or None,
             duration_seconds=ResponseParser.parse_duration(duration_text),
             published_text=published_text or None,
-            url='https://www.youtube.com/watch?v=%s' % video_id,
+            url=f'https://www.youtube.com/watch?v={video_id}',
             is_live=time_status == 'LIVE',
             is_short=time_status == 'SHORTS',
             view_count=view_count_text or None,
@@ -478,7 +477,10 @@ class ResponseParser:
                     text = avatar.get('text', {}).get('content', '')
                     if text:
                         # Text is like "by Channel Name"
-                        channel = text.removeprefix('by ').strip() if text.startswith('by ') else text
+                        if text.startswith('by '):
+                            channel = text.removeprefix('by ').strip()
+                        else:
+                            channel = text
 
         # Extract videos from contents
         try:
@@ -765,6 +767,6 @@ class ResponseParser:
             duration=duration_text or None,
             duration_seconds=ResponseParser.parse_duration(duration_text),
             position=position,
-            url='https://www.youtube.com/watch?v=%s' % video_id,
+            url=f'https://www.youtube.com/watch?v={video_id}',
             thumbnails=thumbnails,
         )

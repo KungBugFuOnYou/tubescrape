@@ -17,7 +17,7 @@ def serve(ctx: click.Context, host: str, port: int) -> None:
             'Install with: pip install tubescrape[api]',
             err=True,
         )
-        raise SystemExit(1)
+        raise SystemExit(1) from None
 
     from tubescrape.api.app import create_app
 

@@ -6,7 +6,7 @@ import click
 @click.command()
 @click.argument('video')
 @click.option('--lang', '-l', multiple=True, help='Preferred language code(s) in priority order.')
-@click.option('--translate', '-t', 'translate_to', default=None, help='Translate transcript to this language code.')
+@click.option('--translate', '-t', 'translate_to', default=None, help='Translate to this lang.')
 @click.option(
     '--format', '-f', 'fmt',
     default='text',
@@ -15,7 +15,7 @@ import click
 )
 @click.option('--list-languages', is_flag=True, help='List available transcript languages.')
 @click.option('--no-timestamps', is_flag=True, help='Return plain text without timestamps.')
-@click.option('--save', 'save_path', default=None, help='Save transcript to file (format inferred from extension).')
+@click.option('--save', 'save_path', default=None, help='Save to file (format from ext).')
 @click.option('--json', 'output_json', is_flag=True, help='Output language list as JSON.')
 @click.pass_context
 def transcript(
@@ -66,7 +66,7 @@ def transcript(
 
         if save_path:
             path = result.save(save_path)
-            click.echo('Saved to %s' % path)
+            click.echo(f'Saved to {path}')
             return
 
         formatted = YouTube.format_transcript(result, fmt=fmt)

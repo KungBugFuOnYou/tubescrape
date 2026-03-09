@@ -27,7 +27,7 @@ class SRTFormatter(Formatter):
             start = self._format_timestamp(segment.start)
             end = self._format_timestamp(segment.start + segment.duration)
             lines.append('%d' % i)
-            lines.append('%s --> %s' % (start, end))
+            lines.append(f'{start} --> {end}')
             lines.append(segment.text)
             lines.append('')
 

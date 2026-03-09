@@ -7,7 +7,7 @@ from tubescrape.cli.output import print_playlist_results
 
 @click.command()
 @click.argument('playlist')
-@click.option('--max-results', '-n', default=0, type=int, help='Maximum videos to return (0 for all).')
+@click.option('--max-results', '-n', default=0, type=int, help='Max videos (0=all).')
 @click.option('--json', 'output_json', is_flag=True, help='Output as JSON.')
 @click.pass_context
 def playlist(ctx: click.Context, playlist: str, max_results: int, output_json: bool) -> None:

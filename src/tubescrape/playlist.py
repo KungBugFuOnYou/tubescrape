@@ -5,7 +5,7 @@ import logging
 from tubescrape._http import HTTPClient
 from tubescrape._innertube import InnerTube
 from tubescrape._parsers import ResponseParser
-from tubescrape.models import PlaylistEntry, PlaylistResult
+from tubescrape.models import PlaylistResult
 
 logger = logging.getLogger('tubescrape.playlist')
 

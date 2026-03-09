@@ -110,7 +110,7 @@ class SearchFilter:
             sort_key = sort_by.lower().replace(' ', '_')
             if sort_key not in cls.SORT_BY:
                 raise ValueError(
-                    'Invalid sort_by: %r. Valid: %s' % (sort_by, ', '.join(cls.SORT_BY))
+                    'Invalid sort_by: {!r}. Valid: {}'.format(sort_by, ', '.join(cls.SORT_BY))
                 )
             value = cls.SORT_BY[sort_key]
             if value != 0:  # 0 is default (relevance), skip it
@@ -123,7 +123,7 @@ class SearchFilter:
             date_key = upload_date.lower().replace(' ', '_')
             if date_key not in cls.UPLOAD_DATE:
                 raise ValueError(
-                    'Invalid upload_date: %r. Valid: %s' % (
+                    'Invalid upload_date: {!r}. Valid: {}'.format(
                         upload_date, ', '.join(cls.UPLOAD_DATE),
                     )
                 )
@@ -133,7 +133,7 @@ class SearchFilter:
             type_key = type.lower()
             if type_key not in cls.TYPE:
                 raise ValueError(
-                    'Invalid type: %r. Valid: %s' % (type, ', '.join(cls.TYPE))
+                    'Invalid type: {!r}. Valid: {}'.format(type, ', '.join(cls.TYPE))
                 )
             filters.extend(cls._encode_varint_field(2, cls.TYPE[type_key]))
 
@@ -141,7 +141,7 @@ class SearchFilter:
             dur_key = duration.lower()
             if dur_key not in cls.DURATION:
                 raise ValueError(
-                    'Invalid duration: %r. Valid: %s' % (duration, ', '.join(cls.DURATION))
+                    'Invalid duration: {!r}. Valid: {}'.format(duration, ', '.join(cls.DURATION))
                 )
             filters.extend(cls._encode_varint_field(3, cls.DURATION[dur_key]))
 
@@ -152,7 +152,7 @@ class SearchFilter:
                 feat_key = feat.lower().replace(' ', '_')
                 if feat_key not in cls.FEATURES:
                     raise ValueError(
-                        'Invalid feature: %r. Valid: %s' % (feat, ', '.join(cls.FEATURES))
+                        'Invalid feature: {!r}. Valid: {}'.format(feat, ', '.join(cls.FEATURES))
                     )
                 filters.extend(cls._encode_varint_field(4, cls.FEATURES[feat_key]))
 

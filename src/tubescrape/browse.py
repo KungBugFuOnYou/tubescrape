@@ -46,9 +46,9 @@ class YouTubeBrowse:
             ChannelNotFoundError: If the channel cannot be found.
         """
         if handle_or_vanity.startswith('/c/') or handle_or_vanity.startswith('/user/'):
-            url = 'https://www.youtube.com%s' % handle_or_vanity
+            url = f'https://www.youtube.com{handle_or_vanity}'
         elif handle_or_vanity.startswith('@'):
-            url = 'https://www.youtube.com/%s' % handle_or_vanity
+            url = f'https://www.youtube.com/{handle_or_vanity}'
         else:
             raise ChannelNotFoundError(handle_or_vanity)
 
@@ -57,9 +57,9 @@ class YouTubeBrowse:
     async def aresolve_channel_id(self, handle_or_vanity: str) -> str:
         """Async version of resolve_channel_id."""
         if handle_or_vanity.startswith('/c/') or handle_or_vanity.startswith('/user/'):
-            url = 'https://www.youtube.com%s' % handle_or_vanity
+            url = f'https://www.youtube.com{handle_or_vanity}'
         elif handle_or_vanity.startswith('@'):
-            url = 'https://www.youtube.com/%s' % handle_or_vanity
+            url = f'https://www.youtube.com/{handle_or_vanity}'
         else:
             raise ChannelNotFoundError(handle_or_vanity)
 

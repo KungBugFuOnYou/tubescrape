@@ -452,14 +452,14 @@ class YouTube:
         if resolved and resolved.startswith('UC') and len(resolved) == 24:
             return resolved
         # Needs resolution (@handle, /c/, /user/)
-        return self._browse.resolve_channel_id(resolved)
+        return self._browse.resolve_channel_id(resolved or channel)
 
     async def _aresolve_channel(self, channel: str) -> str:
         """Async version of _resolve_channel."""
         resolved = URLParser.extract_channel_id(channel)
         if resolved and resolved.startswith('UC') and len(resolved) == 24:
             return resolved
-        return await self._browse.aresolve_channel_id(resolved)
+        return await self._browse.aresolve_channel_id(resolved or channel)
 
     # ── Lifecycle ──
 
@@ -484,4 +484,4 @@ class YouTube:
         await self.aclose()
 
     def __repr__(self) -> str:
-        return 'YouTube(proxy=%r)' % self._http._proxy
+        return f'YouTube(proxy={self._http._proxy!r})'

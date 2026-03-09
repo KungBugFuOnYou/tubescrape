@@ -14,7 +14,9 @@ router = APIRouter()
 async def get_transcript(
     video_id: str,
     lang: str = Query('en', description='Preferred language code'),
-    translate_to: str | None = Query(None, description='Translate transcript to this language code'),
+    translate_to: str | None = Query(
+        None, description='Translate to this language code',
+    ),
     format: str = Query('json', description='Output format (json, text, srt, vtt)'),
     timestamps: bool = Query(True, description='Include timestamps in response'),
     yt: YouTube = Depends(get_youtube),

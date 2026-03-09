@@ -8,7 +8,6 @@ from tubescrape.models import (
     PlaylistResult,
     SearchResult,
     ShortsResult,
-    Transcript,
     TranscriptListEntry,
 )
 
@@ -24,7 +23,7 @@ def print_search_results(result: SearchResult, output_json: bool = False) -> Non
         from rich.table import Table
 
         console = Console()
-        table = Table(title='Search: %s' % result.query, show_lines=True)
+        table = Table(title=f'Search: {result.query}', show_lines=True)
         table.add_column('#', style='dim', width=4)
         table.add_column('Title', style='bold', max_width=50)
         table.add_column('Channel', style='cyan', max_width=25)
@@ -58,7 +57,7 @@ def print_browse_results(result: BrowseResult, output_json: bool = False) -> Non
         from rich.table import Table
 
         console = Console()
-        table = Table(title='Channel: %s' % result.channel_id, show_lines=True)
+        table = Table(title=f'Channel: {result.channel_id}', show_lines=True)
         table.add_column('#', style='dim', width=4)
         table.add_column('Title', style='bold', max_width=50)
         table.add_column('Duration', justify='right')
@@ -98,7 +97,7 @@ def print_transcript_languages(
         from rich.table import Table
 
         console = Console()
-        table = Table(title='Transcripts for %s' % video_id)
+        table = Table(title=f'Transcripts for {video_id}')
         table.add_column('Language', style='bold')
         table.add_column('Code')
         table.add_column('Type')
@@ -117,7 +116,7 @@ def print_transcript_languages(
     except ImportError:
         for entry in entries:
             kind = 'auto' if entry.is_generated else 'manual'
-            print('%s (%s) [%s]' % (entry.language, entry.language_code, kind))
+            print(f'{entry.language} ({entry.language_code}) [{kind}]')
 
 
 def print_playlist_results(result: PlaylistResult, output_json: bool = False) -> None:
@@ -148,7 +147,7 @@ def print_playlist_results(result: PlaylistResult, output_json: bool = False) ->
 
         console.print(table)
         if result.channel:
-            console.print('[dim]By: %s[/dim]' % result.channel)
+            console.print(f'[dim]By: {result.channel}[/dim]')
         console.print('[dim]%d videos[/dim]' % len(result.videos))
 
     except ImportError:
@@ -158,15 +157,15 @@ def print_playlist_results(result: PlaylistResult, output_json: bool = False) ->
 def _print_playlist_plain(result: PlaylistResult) -> None:
     """Fallback plain text output for playlist results."""
     title = result.title or result.playlist_id
-    print('Playlist: %s\n' % title)
+    print(f'Playlist: {title}\n')
     if result.channel:
-        print('By: %s\n' % result.channel)
+        print(f'By: {result.channel}\n')
     for video in result.videos:
         print('%d. %s' % (video.position, video.title))
-        print('   Channel: %s | Duration: %s' % (
+        print('   Channel: {} | Duration: {}'.format(
             video.channel, video.duration or '-',
         ))
-        print('   %s\n' % video.url)
+        print(f'   {video.url}\n')
 
 
 def print_shorts_results(result: ShortsResult, output_json: bool = False) -> None:
@@ -180,7 +179,7 @@ def print_shorts_results(result: ShortsResult, output_json: bool = False) -> Non
         from rich.table import Table
 
         console = Console()
-        table = Table(title='Shorts: %s' % result.channel_id, show_lines=True)
+        table = Table(title=f'Shorts: {result.channel_id}', show_lines=True)
         table.add_column('#', style='dim', width=4)
         table.add_column('Title', style='bold', max_width=50)
         table.add_column('Views', justify='right')
@@ -208,7 +207,7 @@ def print_channel_playlists_results(
         from rich.table import Table
 
         console = Console()
-        table = Table(title='Playlists: %s' % result.channel_id, show_lines=True)
+        table = Table(title=f'Playlists: {result.channel_id}', show_lines=True)
         table.add_column('#', style='dim', width=4)
         table.add_column('Title', style='bold', max_width=50)
         table.add_column('Videos', justify='right')
@@ -225,37 +224,37 @@ def print_channel_playlists_results(
 
 def _print_shorts_plain(result: ShortsResult) -> None:
     """Fallback plain text output for shorts results."""
-    print('Shorts: %s\n' % result.channel_id)
+    print(f'Shorts: {result.channel_id}\n')
     for i, short in enumerate(result.shorts, start=1):
         print('%d. %s' % (i, short.title))
         print('   Views: %s' % (short.view_count or '-'))
-        print('   %s\n' % short.url)
+        print(f'   {short.url}\n')
 
 
 def _print_channel_playlists_plain(result: ChannelPlaylistsResult) -> None:
     """Fallback plain text output for channel playlists."""
-    print('Playlists: %s\n' % result.channel_id)
+    print(f'Playlists: {result.channel_id}\n')
     for i, pl in enumerate(result.playlists, start=1):
         print('%d. %s' % (i, pl.title))
         print('   Videos: %s' % (pl.video_count or '-'))
-        print('   %s\n' % pl.url)
+        print(f'   {pl.url}\n')
 
 
 def _print_search_plain(result: SearchResult) -> None:
     """Fallback plain text output for search results."""
-    print('Search: %s\n' % result.query)
+    print(f'Search: {result.query}\n')
     for i, video in enumerate(result.videos, start=1):
         print('%d. %s' % (i, video.title))
-        print('   Channel: %s | Duration: %s | %s' % (
+        print('   Channel: {} | Duration: {} | {}'.format(
             video.channel, video.duration or '-', video.published_text or '-',
         ))
-        print('   %s\n' % video.url)
+        print(f'   {video.url}\n')
 
 
 def _print_browse_plain(result: BrowseResult) -> None:
     """Fallback plain text output for browse results."""
-    print('Channel: %s\n' % result.channel_id)
+    print(f'Channel: {result.channel_id}\n')
     for i, video in enumerate(result.videos, start=1):
         print('%d. %s' % (i, video.title))
-        print('   Duration: %s | %s' % (video.duration or '-', video.published_text or '-'))
-        print('   %s\n' % video.url)
+        print('   Duration: {} | {}'.format(video.duration or '-', video.published_text or '-'))
+        print(f'   {video.url}\n')

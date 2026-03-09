@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import re
 import logging
+import re
 
 from tubescrape._http import HTTPClient
 from tubescrape._innertube import InnerTube
@@ -161,7 +161,7 @@ class YouTubeTranscript:
 
         payload = InnerTube.build_player_payload(video_id)
         response = self._http.post(
-            '%s?key=%s' % (InnerTube.PLAYER_URL, api_key),
+            f'{InnerTube.PLAYER_URL}?key={api_key}',
             json=payload,
         )
         data = response.json()
@@ -180,7 +180,7 @@ class YouTubeTranscript:
 
         payload = InnerTube.build_player_payload(video_id)
         response = await self._http.apost(
-            '%s?key=%s' % (InnerTube.PLAYER_URL, api_key),
+            f'{InnerTube.PLAYER_URL}?key={api_key}',
             json=payload,
         )
         data = response.json()
@@ -292,7 +292,7 @@ class YouTubeTranscript:
         # 3. Any English variant
         for lang_code in list(manual.keys()) + list(generated.keys()):
             if lang_code.startswith('en'):
-                info = manual.get(lang_code) or generated.get(lang_code)
+                info = manual.get(lang_code) or generated.get(lang_code, {})
                 if info:
                     logger.info(
                         'No exact %s match, using English variant: %s',
@@ -306,7 +306,7 @@ class YouTubeTranscript:
             for lang in languages:
                 if lang in available_langs:
                     source = translatable[0]
-                    url = '%s&tlang=%s' % (source['url'], lang)
+                    url = '{}&tlang={}'.format(source['url'], lang)
                     info = {**source, 'translation_language': lang}
                     logger.info(
                         'Translating %s transcript to %s',
@@ -358,7 +358,7 @@ class YouTubeTranscript:
         if translate_to not in available:
             raise TranslationNotAvailableError(video_id, translate_to)
 
-        url = '%s&tlang=%s' % (track_url, translate_to)
+        url = f'{track_url}&tlang={translate_to}'
         info = {**track_info, 'translation_language': translate_to}
         logger.info(
             'Translating %s transcript to %s',

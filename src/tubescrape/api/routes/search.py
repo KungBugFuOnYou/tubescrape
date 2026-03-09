@@ -13,11 +13,17 @@ router = APIRouter()
 async def search_videos(
     q: str = Query(..., description='Search query'),
     max_results: int = Query(20, ge=1, le=50, description='Maximum results'),
-    sort_by: str | None = Query(None, description='Sort: relevance, upload_date, view_count, rating'),
-    upload_date: str | None = Query(None, description='Filter: last_hour, today, this_week, this_month, this_year'),
+    sort_by: str | None = Query(
+        None, description='Sort: relevance, upload_date, view_count, rating',
+    ),
+    upload_date: str | None = Query(
+        None, description='Filter: hour, today, week, month, year',
+    ),
     type: str | None = Query(None, description='Type: video, channel, playlist, movie'),
     duration: str | None = Query(None, description='Duration: short, medium, long'),
-    features: str | None = Query(None, description='Features (comma-separated): live, 4k, hd, subtitles, hdr'),
+    features: str | None = Query(
+        None, description='Features (csv): live, 4k, hd, subtitles, hdr',
+    ),
     params: str = Query('', description='Raw protobuf-encoded search filter (base64)'),
     yt: YouTube = Depends(get_youtube),
 ) -> SearchResponse:

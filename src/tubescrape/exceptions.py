@@ -13,7 +13,7 @@ class YouTubeError(Exception):
         return self.message
 
     def __repr__(self) -> str:
-        return '%s: %s' % (self.__class__.__name__, self.message)
+        return f'{self.__class__.__name__}: {self.message}'
 
 
 class RequestError(YouTubeError):
@@ -37,7 +37,7 @@ class VideoUnavailableError(YouTubeError):
     def __init__(self, video_id: str, reason: str | None = None):
         self.reason = reason or 'Video unavailable'
         super().__init__(
-            'Video unavailable: %s (%s)' % (video_id, self.reason),
+            f'Video unavailable: {video_id} ({self.reason})',
             video_id=video_id,
         )
 
@@ -54,7 +54,7 @@ class TranscriptsDisabledError(YouTubeError):
 
     def __init__(self, video_id: str):
         super().__init__(
-            'Transcripts are disabled for %s' % video_id,
+            f'Transcripts are disabled for {video_id}',
             video_id=video_id,
         )
 
@@ -64,7 +64,7 @@ class TranscriptsNotAvailableError(YouTubeError):
 
     def __init__(self, video_id: str):
         super().__init__(
-            'Transcripts not available for %s' % video_id,
+            f'Transcripts not available for {video_id}',
             video_id=video_id,
         )
 
@@ -75,7 +75,7 @@ class TranscriptFetchError(YouTubeError):
     def __init__(self, video_id: str, reason: str | None = None):
         self.reason = reason or 'Fetch failed'
         super().__init__(
-            'Transcript fetch failed for %s: %s' % (video_id, self.reason),
+            f'Transcript fetch failed for {video_id}: {self.reason}',
             video_id=video_id,
         )
 
@@ -86,7 +86,7 @@ class TranslationNotAvailableError(YouTubeError):
     def __init__(self, video_id: str, language: str):
         self.language = language
         super().__init__(
-            'Translation to %r is not available for %s' % (language, video_id),
+            f'Translation to {language!r} is not available for {video_id}',
             video_id=video_id,
         )
 
@@ -96,7 +96,7 @@ class PlaylistNotFoundError(YouTubeError):
 
     def __init__(self, playlist_id: str):
         self.playlist_id = playlist_id
-        super().__init__('Playlist not found: %s' % playlist_id)
+        super().__init__(f'Playlist not found: {playlist_id}')
 
 
 class ChannelNotFoundError(YouTubeError):
@@ -104,7 +104,7 @@ class ChannelNotFoundError(YouTubeError):
 
     def __init__(self, channel: str):
         self.channel = channel
-        super().__init__('Channel not found: %s' % channel)
+        super().__init__(f'Channel not found: {channel}')
 
 
 class APIKeyNotFoundError(YouTubeError):
@@ -112,7 +112,7 @@ class APIKeyNotFoundError(YouTubeError):
 
     def __init__(self, video_id: str):
         super().__init__(
-            'INNERTUBE_API_KEY not found for %s' % video_id,
+            f'INNERTUBE_API_KEY not found for {video_id}',
             video_id=video_id,
         )
 
@@ -130,7 +130,7 @@ class BotDetectedError(RequestError):
     def __init__(self, video_id: str | None = None):
         super().__init__(
             'Bot detection triggered%s' % (
-                ' for %s' % video_id if video_id else ''
+                f' for {video_id}' if video_id else ''
             ),
             status_code=403,
         )
